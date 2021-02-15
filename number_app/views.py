@@ -3,7 +3,10 @@ import random
 
 # python manage.py
 
+
 def index(request):
+
+    # request.session['guess'] = 666
 
     # if user guess is not empty
     if 'guess' in request.session and 'number' in request.session:
@@ -27,21 +30,25 @@ def index(request):
             print("New random number: ")
             print(request.session['number'])
 
-    # print("The random number is: ")
-    # print(request.session['number'])
-
-    #Render page
+    # Render page
     return render(request, 'index.html')
 
 
 # Udpates the user guess number then redirect back to root
 def update_guess(request):
-    request.session['guess'] = request.POST['user_guess']
-    #prints the current user guess
-    print("User guess updated")
-    print(request.session['guess'])
+    print("Inside update_guess")
+    # If user input not empty and greater than 0 and also is a integer(check that is not a word)
+    if request.POST['user_guess'] != "" and int(request.POST['user_guess']) > 0:
+        # lol = request.POST['user_guess']
+        # print(lol.isnumeric())
+        print("The input went trough the if statement")
+        request.session['guess'] = request.POST['user_guess']
+        # prints the current user guess
+        print("User guess updated")
+        print(request.session['guess'])
 
     return redirect('/')
+
 
 def generate_number(request):
     print("Generating a new number")
@@ -64,3 +71,4 @@ def clear(request):
     return redirect('/')
 
 
+# USEFUL INFO: the user input is saved as a string in POST.
