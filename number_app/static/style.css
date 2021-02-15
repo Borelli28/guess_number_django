@@ -1,3 +1,19 @@
+
 body {
     text-align: center;
+}
+
+form {
+    margin: 1%;
+}
+
+#label-container {
+    margin: 2%;
+    height: 40%;
+    font-size: xx-large;
+    color: rgb(39, 41, 53);
+}
+
+h5 {
+    color: rgb(255, 183, 0);
 }

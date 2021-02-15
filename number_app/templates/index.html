@@ -28,8 +28,14 @@
     </form>
 
     <form action="/new_number">
-        <button type="submit" class="btn btn-warning">Generate a New Number</button>
+        <button type="submit" class="btn btn-warning">Generate New Number</button>
     </form>
+
+    <div id="label-container">
+        <label>{{ request.session.display }}</label>
+    </div>
+
+    <h5>Click Generate a New Number before submitting first guess</h5>
 
 </body>
 
