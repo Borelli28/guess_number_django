@@ -5,11 +5,8 @@ import random
 
 def index(request):
 
-    #create random number
-    request.session['number'] = random.randint(1, 100)
-
     # if user guess is not empty
-    if 'guess' in request.session:
+    if 'guess' in request.session and 'number' in request.session:
 
         print("Current user guess:")
         print(request.session['guess'])
@@ -26,12 +23,12 @@ def index(request):
         elif request.session['number'] == int(request.session['guess']):
             # print(request.session['number'] + request.session['guess'])
             print("User guess the number!!!!!")
-            request.sessioon['number'] = random.randint(1, 100)
+            request.session['number'] = random.randint(1, 100)
             print("New random number: ")
             print(request.session['number'])
 
-    print("The random number is: ")
-    print(request.session['number'])
+    # print("The random number is: ")
+    # print(request.session['number'])
 
     #Render page
     return render(request, 'index.html')
@@ -46,12 +43,24 @@ def update_guess(request):
 
     return redirect('/')
 
+def generate_number(request):
+    print("Generating a new number")
+    request.session['number'] = random.randint(1, 100)
+    print("The random number is: ")
+    print(request.session['number'])
+
+    return redirect('/')
 
 
 # Clear sessions and redirect to root
 def clear(request):
     request.session.clear()
     print("Session was cleared")
+
+    request.session['number'] = random.randint(1, 100)
+    print("New random number generated:")
+    print(request.session['number'])
+
     return redirect('/')
 
 
